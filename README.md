@@ -1,60 +1,26 @@
-# NEXTGEN-COMMUNICATION-SYSTEMS
+Wireless Notice Board
+Project Description
+This project aims to design and implement a wireless notice board using simple and readily available components: an Arduino Uno, a Bluetooth module HC-05, a 16x2 LCD display, jumper wires, a 1k ohm resistor, and a breadboard. With the help of the wireless notice board, messages may be shown remotely over Bluetooth, providing quick updates without requiring users to physically interact with the board. This initiative can be especially helpful in workplaces, public spaces, and educational institutions where prompt and adaptable communication is essential. Through the use of Bluetooth technology, this system offers a practical and affordable answer to contemporary communication needs.
 
-#include <Wire.h>
-#include <LCD_I2C.h>
-#include <SoftwareSerial.h>
+Installation Instructions
+Clone the Repository:
+bash
+Copy code
+https://github.com/SahanaNilangi/NEXTGEN-COMMUNICATION-SYSTEMS
+Open the Project:
+Open the wireless_notice_board.ino file in the Arduino IDE.
+Upload the Code:
+Connect your Arduino Uno to your computer and upload the code to the Arduino board.
 
-LCD_I2C lcd (0x27);
-SoftwareSerial mySerial (2, 3);   //(RX, TX);
-
-String val = "No Data";
-String oldval;
-String newval = "No Data";
-int i = 0;
-
-void setup() 
-{
-  // put your setup code here, to run once:
-  lcd.begin();
-  lcd.backlight();
-  mySerial.begin(9600);
-  Serial.begin(9600);
-  lcd.setCursor(0, 0);
-  lcd.print("Wireless Notice");
-  lcd.setCursor(0, 1);
-  lcd.print("     Board     ");
-  delay(3000);
-  lcd.clear();
-  lcd.print("Welcome!");
-}
-
-void loop() 
-{
-  val = mySerial.readString();
-  val.trim();
-  Serial.println(val);
-  if(val != oldval)
-  {
-    newval = val;
-  }
-  lcd.clear();
-  lcd.setCursor(i, 0);
-  lcd.print(newval);
-  i++;
-  if(i >= 15)
-  {
-    i = 0;
-  }
-  val = oldval;
-Serial.println(val);
-lcd.clear();
-lcd.setCursor(16,1);
-lcd.print(newval);
-lcd.setCursor(16,0);
-lcd.print("Notice:");
-for(int counter=0; counter<24; counter++)
-{
-  lcd.scrollDisplayLeft();
-  delay(500);
-}
-}
+Usage Examples
+Power On:
+Power on your Arduino board.
+Connect via Bluetooth:
+Pair your Bluetooth-enabled device with the HC-05 module.
+Send Messages:
+Use a Bluetooth terminal app to send messages to the HC-05 module. The message will be displayed on the LCD.
+Features
+Wireless Communication: Enables remote updating of messages via Bluetooth.
+Real-Time Display: Messages are displayed immediately on the 16x2 LCD.
+Easy Setup: Uses simple and readily available components.
+Versatile Application: Suitable for workplaces, public spaces, and educational institutions.
